@@ -91,8 +91,7 @@ public class crapsFirstProject
 										{
 											System.out.println("Awesome!");
 											
-										}
-									
+										}							
 								}
 							else 
 								{
@@ -104,7 +103,7 @@ public class crapsFirstProject
 						{
 								System.out.println("your first role you roll 2 dice if you roll a 7 or 11 you win");
 								System.out.println("if you roll a 2 or 12 you loose");
-								System.out.println("if role niether you begain the other roling.");
+								System.out.println("if you roll niether you begain the other rolling.");
 								System.out.println("All Clear. type (1) for yes or (2) for no");
 								int yesOrNo2= userInput.nextInt();
 								if (yesOrNo2 == 1)
@@ -215,25 +214,40 @@ public class crapsFirstProject
 						boolean roll2 = true;
 						while(roll2)
 							{
-								rollDice2();
-								if (totalDice2==totalDice)
+								if (dollors>=0)
 									{
-										System.out.println("you rolled a " + totalDice2);
-										System.out.println("congradulations you win");
-										dollors=dollors + amountBet*2;
-										play();
-									}
-								else if (totalDice2==7)
-									{
-										System.out.println("you rolled a " + totalDice2);
-										System.out.println("you loose");
-										dollors=dollors-amountBet;
-										roll2 = false;
-										play();
+										rollDice2();
+										if (totalDice2==totalDice)
+											{
+												System.out.println("you rolled a " + totalDice2);
+												System.out.println("congradulations you win");
+												dollors=dollors + amountBet*2;
+											play();
+											}
+										else if (totalDice2==7)
+											{
+												System.out.println("you rolled a " + totalDice2);
+												System.out.println("you loose");
+												if(dollors==0)
+													{
+														looseGame();
+														roll2 = false;
+													}
+												else
+													{
+														roll2 = false;
+													}
+											play();
+											}
+										else
+											{
+												System.out.println("you rolled a " + totalDice2 + " and continue rolling");
+											}
 									}
 								else
 									{
-										System.out.println("you rolled a " + totalDice2 + " and continue rolling");
+										looseGame();
+										roll2 = false;
 									}
 							}
 					
@@ -243,7 +257,7 @@ public class crapsFirstProject
 				boolean game = true;
 				while(game)
 					{
-						if (dollors>0)
+						if (dollors>=0)
 							{
 								System.out.println("you have " + dollors + " dollars. would you like to bet type (1) for yes or (2) for no");
 								int wannaBet= userInput.nextInt();
@@ -267,7 +281,11 @@ public class crapsFirstProject
 									{
 										System.out.println("you rolled a " + totalDice);
 										System.out.println("you loose");
-										dollors=dollors-amountBet;
+										if(dollors==0)
+											{
+												looseGame();
+												game = false;
+											}
 									}
 								else 
 									{
@@ -278,14 +296,30 @@ public class crapsFirstProject
 							}
 						else
 							{
-								System.out.println("you have no more money to bet.");
 								game = false;
+								looseGame();
 							}
 					}									
 		}
 		public static void endGame()
 		{
 			System.out.println("congrats you ended the game with " + dollors + " dollors.");
+		}
+		public static void looseGame()
+		{
+			System.out.println("you no longer have any money would you like to play again? if yes type (1) if no type (2)");
+			int wannaPlayAgain= userInput.nextInt();
+			if (wannaPlayAgain==1)
+				{
+					System.out.println("sweet");
+					dollors=dollors+100;
+					play();
+				}
+			else
+				{
+					System.out.println("ok!");
+					System.exit(0);
+				}
 		}
 
 	}
