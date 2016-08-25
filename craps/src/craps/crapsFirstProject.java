@@ -53,6 +53,7 @@ public class crapsFirstProject
 		}
 		public static void rules()
 		{
+			System.out.println("no this definitaly didnt work!!!")
 			System.out.println("Ok. You are starting off with 100 dollors to gamble with");
 			System.out.println("craps is a dice rolling game. You get two dice and you roll them...");
 			System.out.println("If you roll a 7 or 11 you automatically win and double the amount you gambled");
